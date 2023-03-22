@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import UserContext from "../context/UserContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(false);
+
+  const user = useContext(UserContext);
 
   const loginUser = (event) => {
     event.preventDefault();
-    axios.post("url", "{data}");
+    const data = { email: email, password: password };
+    axios
+      .post("http://localhost:8000/login", data, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        user.setEmail(response.data.email);
+        setEmail("");
+        setPassword("");
+        setLoginError(false);
+      })
+      .catch(() => {
+        setLoginError(true);
+      });
   };
 
   return (
@@ -33,6 +50,7 @@ function Login() {
       <button type="submit" className="w-[280px] h-[35px] bg-blue-400">
         Login
       </button>
+      {loginError && <div>Login error. Check email or password.</div>}
     </form>
   );
 }
