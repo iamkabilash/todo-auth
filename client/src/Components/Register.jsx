@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import { Navigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const user = useContext(UserContext);
 
@@ -19,8 +21,16 @@ function Register() {
         user.setEmail(response.data.email);
         setEmail("");
         setPassword("");
+        setIsLoggedIn(true);
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
       });
   };
+
+  if (isLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <form

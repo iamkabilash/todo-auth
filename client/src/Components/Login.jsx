@@ -1,11 +1,13 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../context/UserContext";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const user = useContext(UserContext);
 
@@ -21,11 +23,17 @@ function Login() {
         setEmail("");
         setPassword("");
         setLoginError(false);
+        setIsLoggedIn(true);
       })
       .catch(() => {
         setLoginError(true);
+        setIsLoggedIn(false);
       });
   };
+
+  if (isLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <form
