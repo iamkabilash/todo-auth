@@ -12,7 +12,9 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_CLIENT_URL}/user`, {
+        withCredentials: true,
+      })
       .then((response) => {
         setEmail(response.data.email);
       });
@@ -20,7 +22,11 @@ function App() {
 
   const logoutUser = () => {
     axios
-      .post("http://localhost:8000/logout", {}, { withCredentials: true })
+      .post(
+        `${process.env.REACT_APP_CLIENT_URL}/logout`,
+        {},
+        { withCredentials: true }
+      )
       .then(() => {
         setEmail("");
       });

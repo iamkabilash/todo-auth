@@ -127,6 +127,10 @@ app.post("/todos", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("Server running @ " + process.env.PORT);
-});
+if (process.env.PORT) {
+  app.listen(process.env.PORT, () => {
+    console.log("Server running...");
+  });
+}
+
+export default app;
