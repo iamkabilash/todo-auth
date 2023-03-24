@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import RegisterUser from "./components/RegisterUser";
+import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import UserContext from "./context/UserContext";
@@ -54,7 +54,7 @@ function App() {
         </nav>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/register" element={<RegisterUser />} />
+          <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
