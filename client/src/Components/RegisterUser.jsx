@@ -3,7 +3,7 @@ import axios from "axios";
 import UserContext from "../context/UserContext";
 import { Navigate } from "react-router-dom";
 
-function Register() {
+function RegisterUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -59,4 +59,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterUser;
